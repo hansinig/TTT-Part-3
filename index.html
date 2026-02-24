@@ -59,7 +59,6 @@
         .square:hover {
             background-color: #ffb7ce;
         }
-        /* Create 3x3 grid layout - force line breaks every 3 squares */
         .square:nth-child(4),
         .square:nth-child(7) {
             clear: left;
@@ -122,8 +121,8 @@
     </div>
 
     <script>
-        let activePlayer = "X"; 
-        let canPlay = false; 
+        let activePlayer = "X";  
+        let canPlay = false;    
 
         function handleSquareClick(event) {
             let clickedSquare = event.target;
@@ -134,7 +133,7 @@
             }
             
             if (clickedSquare.innerText !== "") {
-                return;  // Square already filled, do nothing
+                return;  
             }
             
             clickedSquare.innerText = activePlayer;
@@ -157,18 +156,22 @@
                 activePlayer = "O";
             }
             
+            // Clear all squares
             for (let idx = 0; idx < NUM_SQUARES; idx++) {
                 let currentSquare = document.getElementById("sq" + idx);
                 currentSquare.innerText = "";
                 currentSquare.classList.remove("occupied");
             }
             
+            // Enable gameplay
             canPlay = true;
             
+            // Update display
             document.getElementById("turnDisplay").innerText = activePlayer + "'s Turn";
             document.getElementById("messageBox").innerText = "";
         }
 
+        // Attach click handlers to all squares after page loads
         window.onload = function() {
             for (let position = 0; position < NUM_SQUARES; position++) {
                 let squareElement = document.getElementById("sq" + position);
