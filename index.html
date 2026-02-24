@@ -59,6 +59,7 @@
         .square:hover {
             background-color: #ffb7ce;
         }
+
         .square:nth-child(4),
         .square:nth-child(7) {
             clear: left;
@@ -128,6 +129,8 @@
             let clickedSquare = event.target;
             let squareNumber = clickedSquare.id.replace("sq", "");
             
+            alert("Square " + squareNumber);
+            
             if (!canPlay) {
                 return;
             }
@@ -149,6 +152,7 @@
         }
 
         function startNewGame() {
+            // Randomly pick who starts (0 = X, 1 = O)
             let randomStart = Math.floor(Math.random() * 2);
             if (randomStart === 0) {
                 activePlayer = "X";
@@ -156,22 +160,18 @@
                 activePlayer = "O";
             }
             
-            // Clear all squares
             for (let idx = 0; idx < NUM_SQUARES; idx++) {
                 let currentSquare = document.getElementById("sq" + idx);
                 currentSquare.innerText = "";
                 currentSquare.classList.remove("occupied");
             }
             
-            // Enable gameplay
             canPlay = true;
             
-            // Update display
             document.getElementById("turnDisplay").innerText = activePlayer + "'s Turn";
             document.getElementById("messageBox").innerText = "";
         }
 
-        // Attach click handlers to all squares after page loads
         window.onload = function() {
             for (let position = 0; position < NUM_SQUARES; position++) {
                 let squareElement = document.getElementById("sq" + position);
