@@ -59,7 +59,6 @@
         .square:hover {
             background-color: #ffb7ce;
         }
-        /* Create 3x3 grid layout - force line breaks every 3 squares */
         .square:nth-child(4),
         .square:nth-child(7) {
             clear: left;
@@ -122,46 +121,34 @@
     </div>
 
     <script>
-        // Global variables to track game state
-        let activePlayer = "X";  // Tracks whose turn it is
-        let canPlay = false;     // Controls if moves are allowed
+        let activePlayer = "X";  
+        let canPlay = false;     
 
-        // Function to handle when a square is clicked
         function handleSquareClick(event) {
-            // Get which square was clicked
             let clickedSquare = event.target;
             let squareNumber = clickedSquare.id.replace("sq", "");
             
-            // Show alert with square number
-            alert("Square " + squareNumber + " was clicked!");
-            
-            // Only allow move if game is active and square is empty
             if (!canPlay) {
                 return;
             }
             
             if (clickedSquare.innerText !== "") {
-                return;  // Square already filled, do nothing
+                return; 
             }
             
-            // Place the current player's symbol
             clickedSquare.innerText = activePlayer;
             clickedSquare.classList.add("occupied");
             
-            // Switch to other player
             if (activePlayer === "X") {
                 activePlayer = "O";
             } else {
                 activePlayer = "X";
             }
             
-            // Update turn display
             document.getElementById("turnDisplay").innerText = activePlayer + "'s Turn";
         }
 
-        // Function to start a new game
         function startNewGame() {
-            // Randomly pick who starts (0 = X, 1 = O)
             let randomStart = Math.floor(Math.random() * 2);
             if (randomStart === 0) {
                 activePlayer = "X";
@@ -176,15 +163,11 @@
                 currentSquare.classList.remove("occupied");
             }
             
-            // Enable gameplay
             canPlay = true;
-            
-            // Update display
             document.getElementById("turnDisplay").innerText = activePlayer + "'s Turn";
             document.getElementById("messageBox").innerText = "";
         }
 
-        // Attach click handlers to all squares after page loads
         window.onload = function() {
             for (let position = 0; position < NUM_SQUARES; position++) {
                 let squareElement = document.getElementById("sq" + position);
